@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}ConfigHub{% endblock %}</title>
+      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+      <style>
+                :root {
+                              /* Cyberpunk Palette */
+                              --cp-bg-dark: #050510;
+                              --cp-bg-panel: #0a0a1f;
+                              --cp-bg-card: #121225;
+                              --cp-neon-pink: #ff0055;
+                              --cp-neon-blue: #00f3ff;
+                              --cp-neon-yellow: #ffee00;
+                              --cp-neon-green: #00ff41;
+                              --cp-text-main: #e0e0e0;
+                              --cp-text-dim: #8a8a9b;
+                              --cp-border: #2a2a40;
+                              /* Spacing & Layout */
+                              --container-width: 1200px;
+                              --header-height: 70px;
+                }
+
+                body {
+                              background-color: var(--cp-bg-dark);
+                              color: var(--cp-text-main);
+                              font-family: 'Rajdhani', sans-serif;
+                              margin: 0;
+                              line-height: 1.6;
+                              overflow-x: hidden;
+                              background-image: 
+                                                radial-gradient(circle at 20% 30%, rgba(0, 243, 255, 0.05) 0%, transparent 40%),
+                                                radial-gradient(circle at 80% 70%, rgba(255, 0, 85, 0.05) 0%, transparent 40%);
+                }
+
+                /* Header / Nav */
+                header {
+                              height: var(--header-height);
+                              background: rgba(10, 10, 31, 0.95);
+                              backdrop-filter: blur(10px);
+                              border-bottom: 2px solid var(--cp-neon-blue);
+                              position: sticky;
+                              top: 0;
+                              z-index: 1000;
+                              box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+                }
+
+                .nav-container {
+                              max-width: var(--container-width);
+                              margin: 0 auto;
+                              height: 100%;
+                              display: flex;
+                              align-items: center;
+                              justify-content: space-between;
+                              padding: 0 2rem;
+                }
+
+                .logo {
+                              font-family: 'Orbitron', sans-serif;
+                              font-size: 1.8rem;
+                              font-weight: 700;
+                              color: var(--cp-neon-blue);
+                              text-decoration: none;
+                              letter-spacing: 2px;
+                              text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+                }
+
+                .nav-links {
+                              display: flex;
+                              gap: 2rem;
+                              list-style: none;
+                              margin: 0;
+                              padding: 0;
+                }
+
+                .nav-links a {
+                              color: var(--cp-text-main);
+                              text-decoration: none;
+                              font-weight: 500;
+                              text-transform: uppercase;
+                              letter-spacing: 1px;
+                              transition: all 0.3s ease;
+                              position: relative;
+                }
+
+                .nav-links a:hover {
+                              color: var(--cp-neon-blue);
+                              text-shadow: 0 0 5px var(--cp-neon-blue);
+                }
+
+                .nav-links a::after {
+                              content: '';
+                              position: absolute;
+                              bottom: -5px;
+                              left: 0;
+                              width: 0;
+                              height: 2px;
+                              background: var(--cp-neon-blue);
+                              transition: width 0.3s ease;
+                }
+
+                .nav-links a:hover::after {
+                              width: 100%;
+                }
+
+                /* Hero / Content */
+                main {
+                              padding: 2rem 0;
+                              min-height: calc(100vh - var(--header-height) - 100px);
+                }
+
+                .container {
+                              max-width: var(--container-width);
+                              margin: 0 auto;
+                              padding: 0 2rem;
+                }
+
+                /* Buttons */
+                .btn {
+                              display: inline-block;
+                              padding: 0.8rem 1.5rem;
+                              border-radius: 4px;
+                              text-decoration: none;
+                              font-weight: 700;
+                              text-transform: uppercase;
+                              letter-spacing: 1px;
+                              cursor: pointer;
+                              transition: all 0.3s ease;
+                              font-family: 'Orbitron', sans-serif;
+                              border: none;
+                }
+
+                .btn-primary {
+                              background: var(--cp-neon-blue);
+                              color: var(--cp-bg-dark);
+                              box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+                }
+
+                .btn-primary:hover {
+                              background: #fff;
+                              box-shadow: 0 0 25px var(--cp-neon-blue);
+                              transform: translateY(-2px);
+                }
+
+                .btn-outline {
+                              background: transparent;
+                              border: 2px solid var(--cp-neon-pink);
+                              color: var(--cp-neon-pink);
+                }
+
+                .btn-outline:hover {
+                              background: var(--cp-neon-pink);
+                              color: #fff;
+                              box-shadow: 0 0 15px var(--cp-neon-pink);
+                }
+
+                /* Flash Messages */
+                .flash-messages {
+                              margin-bottom: 2rem;
+                }
+
+                .flash {
+                              padding: 1rem;
+                              border-left: 4px solid var(--cp-neon-blue);
+                              background: var(--cp-bg-panel);
+                              margin-bottom: 0.5rem;
+                              color: var(--cp-neon-blue);
+                              font-family: monospace;
+                }
+
+                /* Footer */
+                footer {
+                              border-top: 1px solid var(--cp-border);
+                              padding: 2rem 0;
+                              text-align: center;
+                              color: var(--cp-text-dim);
+                              font-size: 0.9rem;
+                              background: var(--cp-bg-dark);
+                }
+
+                /* Scrollbar */
+                ::-webkit-scrollbar {
+                              width: 8px;
+                }
+                ::-webkit-scrollbar-track {
+                              background: var(--cp-bg-dark);
+                }
+                ::-webkit-scrollbar-thumb {
+                              background: var(--cp-border);
+                              border-radius: 4px;
+                }
+                ::-webkit-scrollbar-thumb:hover {
+                              background: var(--cp-neon-blue);
+                }
+            </style>
+        {% block styles %}{% endblock %}
+  </head>
+  <body>
+        <header>
+                  <nav class="nav-container">
+                                <a href="{{ url_for('main.index') }}" class="logo">ConfigHub_v2.0</a>a>
+                                <ul class="nav-links">
+                                                  <li><a href="{{ url_for('presets.explore') }}">_EXPLORE</a>a></li>
+                                                {% if current_user.is_authenticated %}
+                                                    <li><a href="{{ url_for('presets.create') }}">_CREATE</a>a></li>
+                                                    <li><a href="{{ url_for('main.profile', username=current_user.username) }}">_PROFILE</a>a></li>
+                                                    {% if current_user.is_admin %}
+                                                        <li><a href="{{ url_for('admin.dashboard') }}">_ADMIN</a>a></li>
+                                                    {% endif %}
+                                                    <li><a href="{{ url_for('auth.logout') }}" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.8rem;">LOGOUT</a>a></li>
+                                                {% else %}
+                                                    <li><a href="{{ url_for('auth.login') }}">LOGIN</a>a></li>
+                                                    <li><a href="{{ url_for('auth.register') }}" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">REGISTER</a>a></li>
+                                                {% endif %}
+                                </ul>ul>
+                  </nav>nav>
+        </header>
+  
+      <main>
+                <div class="container">
+                              <div class="flash-messages">
+                                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                                    {% if messages %}
+                                                        {% for category, message in messages %}
+                                                            <div class="flash flash-{{ category }}">
+                                                                                              // {{ message }}
+                                                            </div>div>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endwith %}
+                              </div>div>
+
+                              {% block content %}{% endblock %}
+                </div>div>
+      </main>
+
+        <footer>
+                  <div class="container">
+                                <p>&copy; 2026 CONFIG_HUB_SYSTEMS. ALL RIGHTS RESERVED. // WAKE UP, SAMURAI</p>
+                  </div>div>
+        </footer>
+  
+      {% block scripts %}{% endblock %}
+  </body>
+</html>html>
+</p>
+        </footer>
+      </main></li></li>
+        </header>
+  </body>
+      </style></title>
+  </head>
